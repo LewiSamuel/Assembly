@@ -1,25 +1,20 @@
+.data
 .text
 main:    
-    add $a0,$0,$t0   # $a0 = $0 + $t0
-    add $a1,$0,$t1   # $a1 = $0 + $t1
-    
-    jal addthem      # chamar a função addthem
-    
-    add $t3,$0,$v0   # mover o retorno da função que esta em $v0 para o $t3
+    li $a1,150   # $a1 = 150
+    li $a2,155   # $a0 = 105
+
+    jal addthem   # chamar a função addthem
+
+    la $a0, ($s2) # coloca o registrador $s2 para ser impresso
+    li $v0,1 	  # comando de impressão de inteiro na tela
     syscall
-
-
+	
+    li $v0, 10    # comando de exit
+    syscall 
+    
 #Função
 addthem:	     
-    addi $sp,$sp,-4     # $sp = $sp - 4
-    sw $t0, 0($sp)      # Armazenar em $t0 o valor de $sp
-
-    # corpo da função
-    add $t0,$a0,$a1     # $t0 = $a0 + $a1 ( valores passados para a função na linha 3 e 4 )
-    add $v0,$0,$t0      # $v0 =  $0 + $t0 ( resultado da função salvo em $v0 )
-
-
-    lw $t0, 0($sp)      # Carregar valor anterior que foi armazenado em $t0
-    addi $sp,$sp,4      # Mover stack pointer $sp = $sp + 4
-    
-jr $ra              # fim da função, voltar para a linha 6 +
+	add $s2,$a1,$a2  # soma o valor dos argumentos $a1 e $a2 e insere no registrador $s2
+#Fim da função
+jr $ra       
