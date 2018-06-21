@@ -10,7 +10,7 @@
 
 # Funcao principal 
 main: 
-		slti $t0,$s0,10  	# retorna um valor booleano 1 para o registrador $t0 caso $s0 seja menor que 10
+		slti $t0,$s0,10  	# retorna o valor  1 para o registrador $t0 caso $s0 seja menor que 10
 		beq $t0,$zero,DONE	## Se $t0 igual a zero, ir até o label "Done"
 		
 		sle  $t0,$s0,10  	# retorna um valor booleano 1 para o registrador $t0 caso $s0 seja menor ou igual que 10
