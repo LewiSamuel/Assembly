@@ -1,15 +1,15 @@
-# Universidade de Brasília (UnB)
-# Departamento de Ciência da Computação (CIC)
-# Introdução aos Sistemas Computacionais
+# Universidade de Brasï¿½lia (UnB)
+# Departamento de Ciï¿½ncia da Computaï¿½ï¿½o (CIC)
+# Introduï¿½ï¿½o aos Sistemas Computacionais
 # Prof. Dr. Vinicius Ruela Pereira Borges - viniciusrpb@unb.br
 
 # Integrantes do grupo/ matricula:
 # Lewi Samuel dos Santos Nery Nunes Ribeiro - 16/0132070
-# Marcos... - xx/xxxxxx
+# Marcos Vinicius Pereira Marques - 14/0071989
 
 # Assembly language: MIPS
-# O que este código faz:  Programa para ordenar um vetor de números
-# inteiros utilizando o algoritmo de Ordenação por Seleção, dado a seguir em linguagem C++. 
+# O que este cï¿½digo faz:  Programa para ordenar um vetor de nï¿½meros
+# inteiros utilizando o algoritmo de Ordenaï¿½ï¿½o por Seleï¿½ï¿½o, dado a seguir em linguagem C++. 
 
 #   void swap( int &a, int &b){
 #  	int t;
@@ -29,7 +29,7 @@
 #	return m;
 #   }
 
-#  ordena os n valores do vetor ‘a’ de n posições
+#  ordena os n valores do vetor ï¿½aï¿½ de n posiï¿½ï¿½es
 
 #   void ordena( int a[], int n ){
 #	int k, indMenor;
@@ -45,42 +45,55 @@
 main:
 #------------------------------------------------# 
 #						 #
-#		 CORPO DO CÓDIGO	 	 #
+#		 CORPO DO CÃ“DIGO	 	 #
 #						 #
 #------------------------------------------------#     
+
+    # Chamar funcao de swap
+    li $a0, 7  
+    li $a1, 6  
+    #jal swap  
     
-    # Chamar função de ordenar
-    jal ordenar  
+    # Print do resultado
+    #la $a2, ($a0)   
+    #li $v0, 1
+    #syscall 
     
-    # Fim de programa
-    li $v0, 10   
+    # Chamar funcao de menor
+    jal menor
+    
+    li $v0, 10    # comando de exit
     syscall 
     
 #------------------------------------------------# 
 #						 #
-#		  FUNÇÕES		 	 #
+#		  FUNÃ‡Ã•ES		 	 #
 #						 #
 #------------------------------------------------# 
 
 # SWAP: troca os valores entre A e B
 swap:	     
-	li $v0, 4
-	la $a0, msg_swap
-	syscall
+	add $t2, $s0, $a0
+	add $a0, $s0, $a1
+	add $a1, $s0, $t2
 jr $ra    
-
 
    
 # MENOR: retorna o indice do menor valor entre x[b] .. x[n-1]
 menor:	     
-	li $v0, 4
-	la $a0, msg_swap
-	syscall
+	slt $t0, $a0, $a1
+	beq $t0, $zero,label1
+	
+	label1:
+		la $a2, ($t0)   
+    		li $v0, 1
+		syscall
+		
 jr $ra     
 
 
 
-# ORDENAR: ordena os n valores do vetor ‘a’ de n posições
+# ORDENAR: ordena os n valores do vetor ï¿½aï¿½ de n posiï¿½ï¿½es
 ordenar:	     
 	li $v0, 4
 	la $a0, msg_swap
